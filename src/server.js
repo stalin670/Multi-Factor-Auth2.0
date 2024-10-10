@@ -3,8 +3,10 @@ import session from "express-session";
 import passport from "passport";
 import dotenv from "dotenv";
 import cors from "cors";
+import dbConnect from "./config/dbConnect.js";
 
 dotenv.config();
+dbConnect();
 
 const app = express();
 
@@ -28,6 +30,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
 // Routes
 
 // Listen app
