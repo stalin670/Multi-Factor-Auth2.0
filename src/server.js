@@ -4,6 +4,7 @@ import passport from "passport";
 import dotenv from "dotenv";
 import cors from "cors";
 import dbConnect from "./config/dbConnect.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 dbConnect();
@@ -32,6 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
+app.use("/api/auth", authRoutes);
 
 // Listen app
 const PORT = process.env.PORT || 8000;
