@@ -102,4 +102,14 @@ export const verify2FA = async (req, res) => {
     return res.status(400).json({ message: "Invalid 2FA token" });
   }
 };
-export const reset2FA = async (req, res) => {};
+export const reset2FA = async (req, res) => {
+  try {
+    const user = req.user;
+    user.twoFactorSecret = "";
+    user.isMfaActive = false;
+    await user.save();
+    return res.status(200).json({message : "2FA reset successfull"});
+  } catch (error) {
+    return res.status(500).json({error : "Error reseting 2FA", message : error});
+  }
+};
