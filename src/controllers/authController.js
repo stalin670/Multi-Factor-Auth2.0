@@ -35,11 +35,19 @@ export const authStatus = async (req, res) => {
       username: req.user.username,
       isMfaActive: req.user.isMfaActive,
     });
-  }else {
-    return res.status(401).json({message : "Unauthorized user"});
+  } else {
+    return res.status(401).json({ message: "Unauthorized user" });
   }
 };
-export const logout = async (req, res) => {};
+export const logout = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized user" });
+  }
+  req.logout((err) => {
+    if (err) return res.status(400).json({ message: "User not logged In" });
+    return res.status(200).json({ message: "User Logout successfully" });
+  });
+};
 export const setup2FA = async (req, res) => {};
 export const verify2FA = async (req, res) => {};
 export const reset2FA = async (req, res) => {};
