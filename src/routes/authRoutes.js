@@ -1,5 +1,14 @@
 import { Router } from "express";
 import passport from "passport";
+import {
+  register,
+  login,
+  logout,
+  authStatus,
+  setup2FA,
+  verify2FA,
+  reset2FA,
+} from "../controllers/authController.js";
 
 const router = Router();
 
